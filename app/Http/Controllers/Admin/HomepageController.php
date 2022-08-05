@@ -185,8 +185,8 @@ class HomepageController extends Controller
     //     echo $schooldata;
     // }
 
-
-
-
-
+    public function contactSetting(Request $request)
+    {
+        dd($request->all());
+    }
 }

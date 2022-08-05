@@ -25,16 +25,9 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="fourth-tab" data-toggle="tab" href="#fourth" role="tab"
-                                    aria-controls="fourth" aria-selected="false">Fourth Tab</a>
+                                    aria-controls="fourth" aria-selected="false">Contact</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="fifth-tab" data-toggle="tab" href="#fifth" role="tab"
-                                    aria-controls="fifth" aria-selected="false">Fifth Tab</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="sixth-tab" data-toggle="tab" href="#sixth" role="tab"
-                                    aria-controls="sixth" aria-selected="false">Sixth Tab</a>
-                            </li>
+
                         </ul>
                     </div>
                 </div>
@@ -133,7 +126,52 @@
                             </form>
                         </div>
                     </div>
+                    <div class="tab-pane fade" id="fourth" role="tabpanel" aria-labelledby="fourth-tab">
+                        <h5 class="card-title">Contact</h5>
+                        <div class="container">
+                            <form class="sform form" method="post" action="{{route('admin.contactsetting')}}">
+                                @csrf()
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="name">Heading<span>*</span></label>
+                                        <input class="form-control mb-1" type="text" name="head" id="head" value=""
+                                            placeholder="Heading..." required>
+                                    </div>
+                                    <div class="col mb-2">
+                                        <label for="address">Sub Heading</label>
+                                        <input class="form-control" type="text" name="sub_heading" id="address" value=""
+                                            placeholder="Sub heading..." required>
+                                    </div>
 
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-2">
+                                        <label for="address">Title</label>
+                                        <input class="form-control" type="text" name="title" id="address" value=""
+                                            placeholder="Title...">
+                                    </div>
+                                    <div class="col mb-2">
+                                        <label for="address">Email</label>
+                                        <input class="form-control" type="email" name="email" id="address" value=""
+                                            placeholder="Email..." required>
+                                    </div>
+                                    <div class="col mb-2">
+                                        <label for="address">Phone</label>
+                                        <input class="form-control" type="text" name="phone" id="address" value=""
+                                            placeholder="Phone" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleFormControlTextarea1"
+                                        class="form-label mb-1">Address<span>*</span></label>
+                                    <textarea class="form-control" name="address" value=""
+                                        id="exampleFormControlTextarea1" rows="1"></textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
 
                 </div>
 </section>

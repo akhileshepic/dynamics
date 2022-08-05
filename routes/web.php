@@ -14,16 +14,11 @@ use App\Http\Controllers\EmployeeController;
 */
 
 Auth::routes();
-Route::get('/', function () {
-    return view('frontend.home');
-})->name('home');
-Route::get('/about', function () {
-    return view('frontend.about');
-})->name('about');
+Route::get('/', 'FrontendController@index')->name('home');
 
-Route::get('/service', function () {
-    return view('frontend.services');
-})->name('service');
+Route::get('/about', 'FrontendController@About')->name('about');
+
+Route::get('/service', 'FrontendController@Service')->name('service');
 
 
 Route::get('/contact', function () {
@@ -61,6 +56,9 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
         Route::post('/servicelimit', 'HomepageController@ServiceLimit')->name('homesectioncount');
         Route::get('/homepage-section', 'HomepageController@homepagesetup')->name('homepage');
         Route::post('/homepage-section', 'HomepageController@Postabouts')->name('abouts');
+
+        //Contact Setting
+        Route::post('/contactsetting', 'HomepageController@contactSetting')->name('contactsetting');
         //Service
         Route::get('/service', 'ServiceController@index')->name('services');
         Route::post('/service', 'ServiceController@Postaservice')->name('service');

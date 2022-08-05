@@ -132,7 +132,7 @@
 
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="school">Category<span>*</span></label>
+                                <label for="school">Category</label>
                                 <select class="form-control category" type="text" name="category_id" id="category_id"
                                     value="{{ old('category_id') }}">
 
@@ -206,7 +206,7 @@
 
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="school">Category<span>*</span></label>
+                                <label for="school">Category</label>
                                 <select class="form-control category" type="text" name="category_id"
                                     id="edit_category_id" value="{{ old('eproduct_id') }}">
 
