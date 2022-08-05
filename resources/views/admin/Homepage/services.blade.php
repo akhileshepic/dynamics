@@ -1,0 +1,323 @@
+@extends('admin.includes.main')
+@section('title')
+
+<title> Management | Services</title>
+
+@endsection
+
+@section('btitle')
+
+<li class="breadcrumb-item">Service</li>
+
+@endsection
+
+@section('style')
+
+<style type="text/css">
+.table-status {
+
+    width: 150px;
+}
+
+.table .active-color {
+
+    color: darkgreen;
+    font-weight: 600;
+}
+
+.table .inactive-color {
+    color: maroon;
+    font-weight: 600;
+}
+
+.table .fa-toggle-on {
+
+    color: darkgreen;
+}
+</style>
+@endsection
+
+@section('body')
+
+<div class="container-fluid">
+    <div class="fade-in">
+        <div class="row ">
+            <div class="col-xl-12 col-md-12 d-flex justify-content-end">
+                <button class="btn btn-sm btn-primary" id="add-school"><i class="fa fa-plus"></i>&nbspAdd
+                    Service</button>
+            </div>
+        </div>
+    </div>
+    <div class="row bg-white mx-0 py-3 mt-2" style="display: block;overflow-x: auto;white-space: nowrap;">
+        <div class="col-md-12">
+            <table class="table " id="table-id">
+                <thead>
+                    <tr class="table-primary">
+
+                        <th>Sr.No.</th>
+
+                        <th>Small Image</th>
+                        <th>Large Image</th>
+                        <th>Title</th>
+                        <th>Description</th>
+
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach($services as $service)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+
+                        <td><img src="{{ asset('public/images/service/'.$service->smallimage ) }}" width="80"></td>
+                        <td><img src="{{ asset('public/images/service/'.$service->largeimage ) }}" width="80"></td>
+                        <td>{{ $service->title }} </td>
+                        <td>{{ $service->description }} </td>
+                        <td>
+                            <a href="javascript:void(0)" class="service_delete"
+                                data-url="{{ route('admin.delete_service',['id'=>$service->id]) }}"><i
+                                    class="fa fa-trash" style="color: maroon;"></i></a>
+                            <a title="Edit" href="javascript:void(0)" class="edit_service"
+                                data-id="{{ $service->id }}"><i class="fa fa-pencil"
+                                    style="color: #29b6f6;"></i></a>&nbsp&nbsp
+                        </td>
+
+                    </tr>
+                    @endforeach
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- /.row-->
+</div>
+</div>
+
+@endsection
+
+@section('modal')
+
+<div class="modal fade" id="add-school-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document" style="max-width: 800px;">
+        <div class="modal-content">
+            <div class="modal-header py-3">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3 class="text-center">Add Services</h3>
+
+                <form class="sform form" method="post" action="{{ route('admin.service') }}"
+                    enctype="multipart/form-data">
+                    @csrf
+                    <div class="row " style="padding: 30px;">
+
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="image">Upload Small Image</label>
+                                <input type="file" name="smallimage" id="Small Image" required
+                                    value="{{ old('smallimage') }}">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="image">Upload Feture Image</label>
+                                <input type="file" name="largeimage" id="Small Image" required
+                                    value="{{ old('largeimage') }}">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input type="textbox" name="title" id="title" value="{{ old('title') }}"
+                                    placeholder="Enter Title" data-parsley-required
+                                    data-parsley-required-message="Title is required">
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="discription">Discription</label>
+                                <textarea name="description">{{old('description')}}</textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+
+                                <button type="submit" name="student-submit" class="btn btn-primary"
+                                    style="float: right;">Save</button>
+
+                                <button type="button" class="btn btn-danger" style="float: right;margin-right: 10px;"
+                                    data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="modal fade" id="edit-school-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document" style="max-width: 800px;">
+        <div class="modal-content">
+            <div class="modal-header py-3">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3 class="text-center">Edit Services</h3>
+                <form class="sform form" method="post" action="{{ route('admin.update_service') }}"
+                    enctype="multipart/form-data">
+                    @csrf
+                    <div class="row " style="padding: 30px;">
+                        <input type="text" name="service_id" value="" id="edit_service_id" hidden>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="image">Upload Small Image</label>
+                                <input type="file" name="smallimage" id="edit_smallimage"
+                                    value="{{ old('smallimage') }}">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="image">Upload Feture Image</label>
+                                <input type="file" name="largeimage" id="edit_largeimage"
+                                    value="{{ old('largeimage') }}">
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="campus_size">Title</label>
+                                <input type="text" name="title" id="edit_title" value="{{ old('title') }}"
+                                    placeholder="Enter title">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="discription">Discription</label>
+                                <textarea name="description" id="edit_description">{{old('description')}}</textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+
+                                <button type="submit" name="student-submit" class="btn btn-primary"
+                                    style="float: right;">Save</button>
+
+                                <button type="button" class="btn btn-danger" style="float: right;margin-right: 10px;"
+                                    data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+
+
+@section('script')
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+    $('#add-school').click(function() {
+
+        $('#add-school-modal').modal('show');
+
+    });
+
+    $('.service_delete').click(function() {
+
+        var url = $(this).data('url');
+
+        swal({
+
+            title: "Are you sure?",
+            text: "You want to delete this School!",
+            icon: "warning",
+            buttons: [
+                'No, cancel it!',
+                'Yes, I am sure!'
+            ],
+            closeOnClickOutside: false,
+            dangerMode: true,
+
+
+        }).then(function(isConfirm) {
+
+            if (isConfirm) {
+
+                window.location.href = url;
+
+            }
+
+        });
+
+    });
+
+
+
+});
+
+
+$('.edit_service').click(function(e) {
+
+    e.preventDefault();
+    var id = $(this).data('id');
+
+    var token = $('meta[name="csrf-token"]').attr('content');
+
+    $.ajax({
+
+        url: "{{ route('admin.edit_service') }}",
+        method: 'POST',
+        data: {
+
+            _token: token,
+            id: id
+
+        },
+
+        success: function(data) {
+
+            if (data) {
+
+                var data = $.parseJSON(data);
+                $('#edit_service_id').val(data.id);
+                $('#edit_icon').val(data.icon);
+                $('#edit_title').val(data.title);
+                $('#edit_description').val(data.description);
+
+
+
+                $('#edit-school-modal').modal('show');
+
+            }
+
+        }
+
+    });
+
+})
+</script>
+
+@endsection

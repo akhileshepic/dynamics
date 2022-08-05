@@ -1,0 +1,141 @@
+$flaticon-font: "flaticon";
+
+@font-face {
+    font-family: $flaticon-font;
+    src: url("./flaticon.ttf?493092c8a4a1f065070191f72ddf4601") format("truetype"),
+url("./flaticon.woff?493092c8a4a1f065070191f72ddf4601") format("woff"),
+url("./flaticon.woff2?493092c8a4a1f065070191f72ddf4601") format("woff2"),
+url("./flaticon.eot?493092c8a4a1f065070191f72ddf4601#iefix") format("embedded-opentype"),
+url("./flaticon.svg?493092c8a4a1f065070191f72ddf4601#flaticon") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+$flaticon-map: (
+    "order": "\f101",
+    "delivery-box": "\f102",
+    "receipt": "\f103",
+    "invoice": "\f104",
+    "coupon": "\f105",
+    "sales": "\f106",
+    "shopping-bag": "\f107",
+    "shopping-bag-1": "\f108",
+    "refund": "\f109",
+    "return": "\f10a",
+    "categories": "\f10b",
+    "category": "\f10c",
+    "categories-1": "\f10d",
+    "brand": "\f10e",
+    "price-tag": "\f10f",
+    "basket": "\f110",
+    "grocery": "\f111",
+    "shopping": "\f112",
+    "group": "\f113",
+    "group-1": "\f114",
+    "member-card": "\f115",
+    "member-card-1": "\f116",
+    "member-card-2": "\f117",
+    "membership": "\f118",
+    "wallet": "\f119",
+    "wallet-1": "\f11a",
+    "pay": "\f11b",
+    "cash-payment": "\f11c",
+    "debit-card": "\f11d",
+);
+
+.flaticon-order:before {
+    content: map-get($flaticon-map, "order");
+}
+.flaticon-delivery-box:before {
+    content: map-get($flaticon-map, "delivery-box");
+}
+.flaticon-receipt:before {
+    content: map-get($flaticon-map, "receipt");
+}
+.flaticon-invoice:before {
+    content: map-get($flaticon-map, "invoice");
+}
+.flaticon-coupon:before {
+    content: map-get($flaticon-map, "coupon");
+}
+.flaticon-sales:before {
+    content: map-get($flaticon-map, "sales");
+}
+.flaticon-shopping-bag:before {
+    content: map-get($flaticon-map, "shopping-bag");
+}
+.flaticon-shopping-bag-1:before {
+    content: map-get($flaticon-map, "shopping-bag-1");
+}
+.flaticon-refund:before {
+    content: map-get($flaticon-map, "refund");
+}
+.flaticon-return:before {
+    content: map-get($flaticon-map, "return");
+}
+.flaticon-categories:before {
+    content: map-get($flaticon-map, "categories");
+}
+.flaticon-category:before {
+    content: map-get($flaticon-map, "category");
+}
+.flaticon-categories-1:before {
+    content: map-get($flaticon-map, "categories-1");
+}
+.flaticon-brand:before {
+    content: map-get($flaticon-map, "brand");
+}
+.flaticon-price-tag:before {
+    content: map-get($flaticon-map, "price-tag");
+}
+.flaticon-basket:before {
+    content: map-get($flaticon-map, "basket");
+}
+.flaticon-grocery:before {
+    content: map-get($flaticon-map, "grocery");
+}
+.flaticon-shopping:before {
+    content: map-get($flaticon-map, "shopping");
+}
+.flaticon-group:before {
+    content: map-get($flaticon-map, "group");
+}
+.flaticon-group-1:before {
+    content: map-get($flaticon-map, "group-1");
+}
+.flaticon-member-card:before {
+    content: map-get($flaticon-map, "member-card");
+}
+.flaticon-member-card-1:before {
+    content: map-get($flaticon-map, "member-card-1");
+}
+.flaticon-member-card-2:before {
+    content: map-get($flaticon-map, "member-card-2");
+}
+.flaticon-membership:before {
+    content: map-get($flaticon-map, "membership");
+}
+.flaticon-wallet:before {
+    content: map-get($flaticon-map, "wallet");
+}
+.flaticon-wallet-1:before {
+    content: map-get($flaticon-map, "wallet-1");
+}
+.flaticon-pay:before {
+    content: map-get($flaticon-map, "pay");
+}
+.flaticon-cash-payment:before {
+    content: map-get($flaticon-map, "cash-payment");
+}
+.flaticon-debit-card:before {
+    content: map-get($flaticon-map, "debit-card");
+}

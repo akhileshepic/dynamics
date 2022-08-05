@@ -1,0 +1,109 @@
+@font-face {
+    font-family: "flaticon";
+    src: url("./flaticon.ttf?493092c8a4a1f065070191f72ddf4601") format("truetype"),
+url("./flaticon.woff?493092c8a4a1f065070191f72ddf4601") format("woff"),
+url("./flaticon.woff2?493092c8a4a1f065070191f72ddf4601") format("woff2"),
+url("./flaticon.eot?493092c8a4a1f065070191f72ddf4601#iefix") format("embedded-opentype"),
+url("./flaticon.svg?493092c8a4a1f065070191f72ddf4601#flaticon") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 70px;
+    color: #3B61AD;
+}
+
+.flaticon-order:before {
+    content: "\f101";
+}
+.flaticon-delivery-box:before {
+    content: "\f102";
+}
+.flaticon-receipt:before {
+    content: "\f103";
+}
+.flaticon-invoice:before {
+    content: "\f104";
+}
+.flaticon-coupon:before {
+    content: "\f105";
+}
+.flaticon-sales:before {
+    content: "\f106";
+}
+.flaticon-shopping-bag:before {
+    content: "\f107";
+}
+.flaticon-shopping-bag-1:before {
+    content: "\f108";
+}
+.flaticon-refund:before {
+    content: "\f109";
+}
+.flaticon-return:before {
+    content: "\f10a";
+}
+.flaticon-categories:before {
+    content: "\f10b";
+}
+.flaticon-category:before {
+    content: "\f10c";
+}
+.flaticon-categories-1:before {
+    content: "\f10d";
+}
+.flaticon-brand:before {
+    content: "\f10e";
+}
+.flaticon-price-tag:before {
+    content: "\f10f";
+}
+.flaticon-basket:before {
+    content: "\f110";
+}
+.flaticon-grocery:before {
+    content: "\f111";
+}
+.flaticon-shopping:before {
+    content: "\f112";
+}
+.flaticon-group:before {
+    content: "\f113";
+}
+.flaticon-group-1:before {
+    content: "\f114";
+}
+.flaticon-member-card:before {
+    content: "\f115";
+}
+.flaticon-member-card-1:before {
+    content: "\f116";
+}
+.flaticon-member-card-2:before {
+    content: "\f117";
+}
+.flaticon-membership:before {
+    content: "\f118";
+}
+.flaticon-wallet:before {
+    content: "\f119";
+}
+.flaticon-wallet-1:before {
+    content: "\f11a";
+}
+.flaticon-pay:before {
+    content: "\f11b";
+}
+.flaticon-cash-payment:before {
+    content: "\f11c";
+}
+.flaticon-debit-card:before {
+    content: "\f11d";
+}
