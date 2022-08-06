@@ -1,61 +1,74 @@
 @extends('frontend.common.master')
 @section('title')
-<title> Epiccorporations | Services </title>
-
+|Our Services
+@endsection
 @section('style')
 <style>
-.services-section {
-    height: 100%;
-    text-align: center;
-    background: #fff;
-}
 
-header.jumbotron {
-    background-image: url('{{asset('public/frontend/images/services.png')}}');
-    background-size: cover;
-    margin-bottom: 0px !important;
-    border-radius: 0px !important;
-}
 </style>
 @endsection
 @section('body')
-<!-- Slider -->
-<header class="jumbotron">
-    <div class="container">
-        <h1 class="text-center">Services</h1>
-
-    </div>
-</header>
-
-@if(@$services)
-<section class="text-center services  aos-init aos-animate" data-aos="fade-down" data-aos-easing="ease-out-cubic"
-    data-aos-duration="2000">
-    <div class="container">
-        <div class="col-lg-12">
-
-            <h1>Services Section</h1>
 
 
-        </div>
-        <div class="row">
-            @foreach($services as $service)
-            <div class="col-lg-4 col-sm-6 col-ex-12 about-item wow lightSpeedIn" data-wow-offset="200">
-                <div class="card baseBlock">
-                    @if($service->smallimage)
-                    <img src="{{asset('public/images/service/'.$service->smallimage)}}" />
-                    @else
-                    <span class="fa fa-users"></span>
-                    @endif
-                    @if($service->title)<h2>{{ucfirst($service->title)}}</h2>@endif
-                    <p class="lead px-2">{{$service->description}}</p>
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+        <div class="page-header d-flex align-items-center" style="background-image: url('');">
+            <div class="container position-relative">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-6 text-center">
+                        @if(!empty(@$servicelimit))
+                        <h2>{{@$servicelimit->heading}}</h2>
+                        @else
+                        <h2>Our Services</h2>
+                        @endif
+                    </div>
                 </div>
             </div>
-            @endforeach
+        </div>
+        <nav>
+            <div class="container">
+                <ol>
+                    <li><a href="{{route('home')}}">Home</a></li>
+                    <li>{{ucwords($servicelimit->heading)}}</li>
+                </ol>
+            </div>
+        </nav>
+    </div><!-- End Breadcrumbs -->
 
+
+    @if(@$services)
+    <section id="services" class="services">
+        <div class="container" data-aos="fade-up">
+            <div class="section-header">
+                @if(!empty(@$servicelimit))
+                <h2>{{@$servicelimit->heading}}</h2>
+                @else
+                <h2>Our Services</h2>
+                @endif
+
+            </div>
+
+            <div class="row gy-4" data-aos="fade-up" data-aos-delay="100">
+                @foreach($services as $service)
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-item  position-relative">
+                        @if($service->smallimage)
+                        <img src="{{asset('public/images/service/'.$service->smallimage)}}"
+                            style="width:100%; margin-bottom: 15px;" />
+
+                        @endif
+                        @if($service->title)<h3>{{ucfirst($service->title)}}</h3>@endif
+                        <p>{{$service->description}}</p>
+                    </div>
+                </div><!-- End Service Item -->
+                @endforeach
+            </div>
 
         </div>
 
-    </div>
-</section>
-@endif
-@endsection
+    </section><!-- End Our Services Section -->
+
+    @endif
+    @endsection

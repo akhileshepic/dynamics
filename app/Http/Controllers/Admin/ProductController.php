@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Productcategory;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
+use App\Models\Productimages;
 
 class ProductController extends Controller
 {
@@ -21,6 +23,20 @@ class ProductController extends Controller
 
     public function Store(Request $request)
     {
+
+
+        $request->validate(['title' => 'required|unique:products',]);
+
+        // $validator = Validator::make($request->all(), [
+        //     'title' => 'required|unique:products'
+        // ]);
+
+        // if ($validator->fails()) {
+        //     Session::flash('add-model', 'Productnot');
+        //     Session::flash('error', 'Product title already taken !');
+        //     return redirect()->back();
+        // }
+
         if ($request->image != null) {
 
             $save_path = public_path('images/product');
@@ -44,6 +60,7 @@ class ProductController extends Controller
             'category_id' => $request->category_id,
             'image' => $imageName,
             'description' => $request->description,
+            'shortdescription' => $request->shortdescription,
 
         ];
         Product::create($formdata);
@@ -96,20 +113,31 @@ class ProductController extends Controller
     public function Edit(Request $request)
     {
 
-        $data = Product::find($request->id);
+        $data = Product::with('Categoryproduct')->find($request->id);
         echo $data;
     }
 
     public function update(Request $request)
     {
 
+        // $validator = Validator::make($request->all(), [
 
+        //     ' title' => 'required|unique: products, title,' . $request->product_id,
+        // ]);
+
+        // if ($validator->fails()) {
+        //     Session::flash('edit-model', 'Productnot');
+        //     Session::flash('error', 'Product title already taken !');
+        //     return redirect()->back();
+        // }
+
+        $request->validate(['title' => 'required|unique:products,title,' . $request->product_id]);
         $update = Product::find($request->product_id);
         $update->category_id = $request->category_id;
         $update->slug = Str::slug($request->title);
         $update->title = $request->title;
         $update->description = $request->description;
-
+        $update->shortdescription = $request->shortdescription;
         $update->save();
 
         if ($request->image != null) {
@@ -145,5 +173,59 @@ class ProductController extends Controller
 
         Session::flash('message', 'Product Updated Successfully.');
         return redirect()->route('admin.product');
+    }
+
+    public function view($id)
+    {
+        $product = Product::with(['Categoryproduct', 'Productimages'])->find($id);
+        return view('admin.product.view', compact('product'));
+    }
+
+
+    public function uploadImage(Request $request)
+    {
+
+
+        //$images = array();
+        if ($files = $request->file('file')) {
+            $save_path = public_path('images/product');
+
+            if (!file_exists($save_path)) {
+
+                mkdir($save_path, 0777, true);
+            }
+            foreach ($files as $file) {
+                $image_names = md5(rand(1000, 10000));
+                $ext = strtolower($file->getClientOriginalExtension());
+                $imageName = $image_names . '.' . $ext;
+
+                $value = $file->move(public_path('images/product'), $imageName);
+
+                $data = ['url' => $imageName, 'product_id' => $request->product_id];
+                Productimages::create($data);
+            }
+            Session::flash('message', 'Gallery inserted Successfully.');
+            return redirect()->back();
+        }
+    }
+
+    function DeleteImage($id)
+    {
+        $images = Productimages::find($id);
+        $getimagename = $images->url;
+        if ($getimagename != null) {
+
+            $image_path = public_path() . '/images/product/' . $getimagename;
+
+            //dd($image_path);
+            if (file_exists($image_path)) {
+
+
+                unlink($image_path);
+            }
+        }
+        $images->delete();
+        Session::flash('message', 'Product Image  deleted successfully');
+        return redirect()->back();
     }
 }

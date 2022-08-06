@@ -131,41 +131,51 @@
                         <div class="container">
                             <form class="sform form" method="post" action="{{route('admin.contactsetting')}}">
                                 @csrf()
+
+                                @if(@$contactinformation->id)
+                                <input type="text" name="contact_id" value="{{$contactinformation->id}}" hidden>
+                                @endif
                                 <div class="row">
                                     <div class="col">
                                         <label for="name">Heading<span>*</span></label>
-                                        <input class="form-control mb-1" type="text" name="head" id="head" value=""
+                                        <input class="form-control mb-1" type="text" name="contact_head" id="head"
+                                            value="@if(@$contactinformation->id){{ $contactinformation->head }} @else {{old('contact_head')}} @endif"
                                             placeholder="Heading..." required>
                                     </div>
                                     <div class="col mb-2">
-                                        <label for="address">Sub Heading</label>
-                                        <input class="form-control" type="text" name="sub_heading" id="address" value=""
-                                            placeholder="Sub heading..." required>
+                                        <label for="address">Short Discription</label>
+                                        <textarea class="form-control" name="contact_sub_heading"
+                                            id="exampleFormControlTextarea1"
+                                            rows="1">@if(@$contactinformation->id){{ $contactinformation->sub_heading }} @else {{old('contact_sub_heading')}} @endif</textarea>
                                     </div>
 
                                 </div>
                                 <div class="row">
-                                    <div class="col mb-2">
+                                    <div class="col mb-2" style="display: none;">
                                         <label for="address">Title</label>
-                                        <input class="form-control" type="text" name="title" id="address" value=""
+                                        <input class="form-control" type="text" name="contact_title" id="title"
+                                            value="@if(@$contactinformation->id){{ $contactinformation->title }} @else {{old('contact_title')}} @endif"
                                             placeholder="Title...">
                                     </div>
                                     <div class="col mb-2">
                                         <label for="address">Email</label>
-                                        <input class="form-control" type="email" name="email" id="address" value=""
+                                        <input class="form-control" type="email" name="contact_email" id="address"
+                                            value="@if(@$contactinformation->id){{ $contactinformation->email }} @else {{old('contact_email')}} @endif"
                                             placeholder="Email..." required>
                                     </div>
                                     <div class="col mb-2">
                                         <label for="address">Phone</label>
-                                        <input class="form-control" type="text" name="phone" id="address" value=""
+                                        <input class="form-control" type="text" name="contact_phone" id="phone"
+                                            value="@if(@$contactinformation->id){{ $contactinformation->phone }} @else {{old('contact_phone')}} @endif"
                                             placeholder="Phone" required>
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleFormControlTextarea1"
                                         class="form-label mb-1">Address<span>*</span></label>
-                                    <textarea class="form-control" name="address" value=""
-                                        id="exampleFormControlTextarea1" rows="1"></textarea>
+                                    <textarea class="form-control" name="contact_address"
+                                        id="exampleFormControlTextarea1"
+                                        rows="1">@if(@$contactinformation->id){{ $contactinformation->address }} @else {{old('contact_address')}} @endif</textarea>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Submit</button>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Slider;
 use App\Models\Homepageabout;
 use App\Models\Servicelimit;
+use App\Models\Contactaddress;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Laravel\Ui\Presets\React;
@@ -17,8 +18,8 @@ class HomepageController extends Controller
     {
         $aboutus = Homepageabout::first();
         $servicecount = Servicelimit::first();
-
-        return view('admin.homepage.index', compact('aboutus', 'servicecount'));
+        $contactinformation = Contactaddress::first();
+        return view('admin.homepage.index', compact('aboutus', 'servicecount', 'contactinformation'));
     }
     public function slider()
     {
@@ -187,6 +188,24 @@ class HomepageController extends Controller
 
     public function contactSetting(Request $request)
     {
-        dd($request->all());
+        $validatedData = $request->validate([
+            'contact_head' => 'required',
+            'contact_email' => 'required|email',
+            'contact_phone' => 'required|min:10|numeric',
+            'contact_address' => 'required',
+
+        ]);
+        $newUser = Contactaddress::updateOrInsert([
+            'id' => $request->contact_id
+        ], [
+
+            'head'     => trim($request->get('contact_head')),
+            'sub_heading'     => trim($request->get('contact_sub_heading')),
+            'email' => trim($request->get('contact_email')),
+            'phone' => trim($request->get('contact_phone')),
+            'address' => trim($request->get('contact_address')),
+        ]);
+        Session::flash('message', 'Contact Details Updated successfully');
+        return redirect()->route('admin.homepage');
     }
 }

@@ -1,41 +1,69 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="{{route('home')}}">Navbar</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+       <?php $getcontactdetails = getcontactdetails(); ?>
+       <section id="topbar" class="topbar d-flex align-items-center">
+           <div class="container d-flex justify-content-center justify-content-md-between">
+               <div class="contact-info d-flex align-items-center">
+                   <i class="bi bi-envelope d-flex align-items-center">@if(@$getcontactdetails->email)<a
+                           href="mailto:{{@$getcontactdetails->email}}">{{@$getcontactdetails->email}}</a>@else <a
+                           href="mailto:contact@example.com">contact@example.com</a>@endif</i>
+                   <i class="bi bi-phone d-flex align-items-center ms-4"><span> @if(@$getcontactdetails->phone)
+                           {{@$getcontactdetails->phone}} @else 5589 55488 55 @endif</span></i>
+               </div>
+               <div class="social-links d-none d-md-flex align-items-center">
+                   <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                   <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                   <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                   <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+               </div>
+           </div>
+       </section><!-- End Top Bar -->
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="{{route('home')}}">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{route('about')}}">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{route('service')}}">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Product</a>
-          </li>
-         <!--  <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li> -->
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
-          </li>
-        </ul>
-        <!-- <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form> -->
-      </div>
-    </nav>
+       <header id="header" class="header d-flex align-items-center">
+
+           <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+               <a href="{{route('home')}}" class="logo d-flex align-items-center">
+                   <!-- Uncomment the line below if you also wish to use an image logo -->
+                   <!-- <img src="assets/img/logo.png" alt=""> -->
+                   <h1>Impact<span>.</span></h1>
+               </a>
+               <nav id="navbar" class="navbar">
+                   <ul>
+                       <li><a href="{{route('home')}}" class="active">Home</a></li>
+                       <li><a href="{{route('about')}}">About</a></li>
+                       <li><a href="{{route('service')}}">Services</a></li>
+
+                       <li class="dropdown"><a href="#"><span>Products</span> <i
+                                   class="bi bi-chevron-down dropdown-indicator"></i></a>
+                           <ul>
+                               @php $category=Category() @endphp
+
+                               @if(@$category)
+                               @foreach($category as $cat)
+                               <li class="dropdown"><a href="#"><span>{{$cat->title}}</span> <i
+                                           class="bi bi-chevron-down dropdown-indicator"></i></a>
+                                   <ul>
+                                       @foreach(@$cat->Product as $pro)
+                                       <li><a href="{{route('product',['id'=>$pro->slug])}}">{{$pro->title}}</a></li>
+                                       @endforeach
+                                   </ul>
+                               </li>
+                               @endforeach
+                               @endif
+                               @php $product=Product() @endphp
+                               @if(@$product)
+                               @foreach($product as $prod)
+                               <li><a href="{{route('product',['id'=>$prod->slug])}}">{{$prod->title}}</a></li>
+                               @endforeach
+                               @endif
+
+                           </ul>
+                       </li>
+                       <li><a href="#contact">Contact</a></li>
+                   </ul>
+               </nav><!-- .navbar -->
+
+               <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+               <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+
+           </div>
+       </header><!-- End Header -->
+       <!-- End Header -->

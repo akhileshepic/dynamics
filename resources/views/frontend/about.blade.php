@@ -1,60 +1,78 @@
 @extends('frontend.common.master')
 @section('title')
-<title>Schools | Home</title>
+| About Us</title>
 @endsection
 @section('style')
 <style>
-    .about-section {
-    height: 100%;
-    text-align: center;
-    background: #eee;
-}
-header.jumbotron {
-  background-image: url('{{asset('public/frontend/images/services.png')}}');
-  background-size: cover;
-  margin-bottom: 0px!important;
-}
 
-  </style>
+</style>
 @endsection
- @section('body')
-  <!-- Slider -->
-  <header class="jumbotron">
-        <div class="container">
-        @if($about)
-        <h1 class="text-center">{{ucwords($about->heading)}}</h1>
-        @else
-          <h1 class="text-center">About Us</h1>
-        @endif 
-        </div>
-      </header>
-      @if($about)
- <section id="about" class="about-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                  @if($about->heading)
-                    <h1>{{ucwords($about->heading)}}</h1>
-                  @endif
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                   <div class="" data-aos="fade-right" data-aos-duration="1500">
-                   @if($about->sub_heading)
-                     <h3 class="card-title py-3">{{ucwords($about->sub_heading)}}</h3>
-                     @endif
-                     @if($about->description)
-                     <p class="text-justify px-3">{{ucwords($about->description)}}</p>
-                     @endif
-                   </div>
-   
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" data-aos="fade-left" data-aos-duration="1500">
-                  <div class="align-items-center py-1">
-                    <img src="{{asset('public/images/about/'.$about->image)}}" width="100%">
-                  </div>
+@section('body')
+
+
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+        <div class="page-header d-flex align-items-center" style="background-image: url('');">
+            <div class="container position-relative">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-6 text-center">
+                        @if($about)
+                        <h2>{{ucwords($about->heading)}}</h2>
+                        @else
+                        <h2 class="text-center">About Us</h2>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+        <nav>
+            <div class="container">
+                <ol>
+                    <li><a href="{{route('home')}}">Home</a></li>
+                    <li>{{ucwords($about->heading)}}</li>
+                </ol>
+            </div>
+        </nav>
+    </div><!-- End Breadcrumbs -->
+
+    @if($about)
+    <section id="about" class="about">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-header">
+                @if($about->heading)
+                <h2>{{ucwords($about->heading)}}</h2>
+                @endif
+
+            </div>
+
+            <div class="row gy-4">
+                <div class="col-lg-6">
+
+                    @if($about->image)
+                    <img src="{{asset('public/images/about/'.$about->image)}}" class="img-fluid rounded-4 mb-4" alt="">
+                    @endif
+                </div>
+                <div class="col-lg-6">
+                    <div class="content ps-0 ps-lg-5">
+                        @if($about->sub_heading)
+                        <h3>{{($about->sub_heading)}}</h3>
+                        @endif
+                        @if($about->description)
+                        <p class="fst-italic">{{ucwords($about->description)}}</p>
+                        @endif
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section><!-- End About Us Section -->
     @endif
+
+
+</main>
 @endsection

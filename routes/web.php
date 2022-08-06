@@ -25,7 +25,9 @@ Route::get('/contact', function () {
     return view('frontend.contact');
 })->name('contact');
 
+//product
 
+Route::get('/product/{id}', 'FrontendController@SingleProduct')->name('product');
 
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
@@ -74,7 +76,6 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
         Route::get('/category/delete/{id}', 'ProductcategoryController@Delete')->name('delete_category');
         Route::post('/category/edit', 'ProductcategoryController@Edit')->name('edit_category');
         Route::post('/category/update', 'ProductcategoryController@update')->name('update_category');
-
         //product
 
         Route::get('/product', 'ProductController@index')->name('product');
@@ -83,5 +84,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
         Route::get('/product/delete/{id}', 'ProductController@Delete')->name('delete_product');
         Route::post('/product/edit', 'ProductController@Edit')->name('edit_product');
         Route::post('/product/update', 'ProductController@update')->name('update_product');
+        Route::get('/product/view/{id}', 'ProductController@view')->name('view_product');
+        Route::post('/product/uploadimage', 'ProductController@uploadImage')->name('add_images');
+        Route::get('/product/image/delete/{id}', 'ProductController@DeleteImage')->name('delete_image');
     });
 });

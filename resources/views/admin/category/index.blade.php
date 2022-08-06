@@ -135,7 +135,7 @@
 
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="discription">Discription</label>
+                                <label for="discription">Description</label>
                                 <textarea name="description">{{old('description')}}</textarea>
                             </div>
                         </div>
@@ -190,7 +190,7 @@
 
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="discription">Discription</label>
+                                <label for="discription">Description</label>
                                 <textarea name="description" id="edit_description">{{old('description')}}</textarea>
                             </div>
                         </div>

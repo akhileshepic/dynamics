@@ -1,7 +1,7 @@
 @extends('admin.includes.main')
 @section('title')
 
-<title> Admin | Product</title>
+<title> Management | Product</title>
 
 @endsection
 
@@ -60,7 +60,7 @@
 
                         <th>Title</th>
                         <th>Category</th>
-
+                        <th>Short Description</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -72,8 +72,10 @@
                         <td><img src="{{ asset('public/images/product/'.$product->image ) }}" width="80"></td>
                         <td>{{ $product->title }} </td>
                         <td>{{ @$product->Categoryproduct->title }} </td>
-
+                        <td>{{@$product->shortdescription}}</td>
                         <td>
+                            <a title="View" href="{{ route('admin.view_product',['id'=>$product->id]) }}"><i
+                                    class="fa fa-television" style="color: #29b6f6;"></i></a>&nbsp&nbsp
                             <a href="javascript:void(0)" class="product_delete"
                                 data-url="{{ route('admin.delete_product',['id'=>$product->id]) }}"><i
                                     class="fa fa-trash" style="color: maroon;"></i></a>
@@ -148,13 +150,20 @@
                             </div>
 
                         </div>
-
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="discription">Discription</label>
+                                <label for="discription">Short Description</label>
+                                <textarea name="shortdescription" data-parsley-required
+                                    data-parsley-required-message="Description is required">{{old('shortdescription')}}</textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="discription">Description</label>
                                 <textarea name="description">{{old('description')}}</textarea>
                             </div>
                         </div>
+
                         <div class="col-md-12">
                             <div class="form-group">
 
@@ -223,6 +232,13 @@
 
                         </div>
                         <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="discription">Short Discription</label>
+                                <textarea name="shortdescription"
+                                    id="edit_shortdescription">{{old('shortdescription')}}</textarea>
+                            </div>
+                        </div>
+                        <div class=" col-md-12">
                             <div class="form-group">
                                 <label for="discription">Discription</label>
                                 <textarea name="description" id="edit_description">{{old('description')}}</textarea>
@@ -336,6 +352,7 @@ $('.edit_product').click(function(e) {
                 $('#edit_product_id').val(data.id);
 
                 $('#edit_title').val(data.title);
+                $('#edit_shortdescription').val(data.shortdescription);
                 $('#edit_category_id').val(data.category_id);
                 CKEDITOR.instances['edit_description'].setData(data.description);
 
@@ -349,6 +366,14 @@ $('.edit_product').click(function(e) {
     });
 
 })
+
+@if(Session::has('add-model')) <
+    $('#add-school-modal').modal('show');
+@endif
+
+@if(Session::has('edit-model')) <
+    $('#edit-school-modal').modal('show');
+@endif
 </script>
 
 @endsection

@@ -1,7 +1,7 @@
 @extends('admin.includes.main')
 @section('title')
 
-<title>School Management | School</title>
+<title>Management | Slider</title>
 
 @endsection
 
